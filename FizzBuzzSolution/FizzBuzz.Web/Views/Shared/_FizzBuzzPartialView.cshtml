@@ -1,0 +1,8 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+
+@model IPagedList<FizzBuzz.Web.Models.FizzBuzzModel>
+
+@Html.PagedListPager(Model, page => Url.Action("FizzBuzzView", new { page, pageSize = Model.PageSize }))
+
+@*@Html.PagedListPager(Model, page => Url.Action("FizzBuzzView", new { page = page }))*@

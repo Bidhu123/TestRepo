@@ -1,0 +1,67 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+
+@model FizzBuzz.Web.Models.FizzBuzzModel
+
+@{
+    ViewBag.Title = "FizzBuzz";
+}
+
+<head>
+
+    <style type="text/css">
+        body {
+            font-family: Arial;
+            font-size: 10pt;           
+        }
+        
+
+        .error {
+            color: red;
+        }
+    </style>
+
+</head>
+
+
+
+
+<h2>FizzBuzz</h2>
+<body>
+    @using (Html.BeginForm("FizzBuzzView", "FizzBuzz", FormMethod.Post,new { @id = "myForm"}))
+    {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+        <table>
+            @Html.LabelFor(model => model.Number, "Enter the Number:")&nbsp;
+            @Html.TextBoxFor(model => model.Number) &nbsp;           
+            @Html.ValidationMessageFor(model => model.Number, null, new { @class = "error" })<br />
+
+            <input type="submit" value="Submit" />
+        </table>
+    
+   
+        //@Html.PagedListPager((IPagedList)Model, page => Url.Action("FizzBuzzView"),new { page = page })
+
+        if (Model != null)
+        {
+            foreach (var str in Model.NumberList)
+            {
+            <p><li>@str<br /></li></p>
+            }
+        }
+
+    }
+</body>
+
+
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+
+@*@Html.Partial("~/Views/Shared/FizzBuzzPartialView.cshtml", Model)*@
+
+
+
